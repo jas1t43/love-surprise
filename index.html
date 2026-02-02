@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Parwati ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Varela Round', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            padding: 15px;
+        }
+        
+        /* Floating Hearts Background */
+        .floating-heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 24px;
+            animation: floatUp 6s linear forwards;
+            z-index: 1;
+            opacity: 0.8;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(0.8); 
+                opacity: 0.9; 
+            }
+            50% { 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(-110vh) rotate(360deg) scale(1.2); 
+                opacity: 0; 
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            max-width: 90vw;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 22px;
+            box-shadow: 0 10px 40px rgba(194, 24, 91, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #c2185b;
+            font-size: 1.6rem;
+            margin: 10px 0 15px;
+            line-height: 1.6;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+            transition: opacity 0.4s ease;
+        }
+        
+        .valentine-question {
+            color: #d81b60;
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin: 25px 0 30px;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .valentine-question.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 320px;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+            margin: 15px auto;
+            display: block;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.02);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .buttons.visible {
+            opacity: 1;
+        }
+
+        button {
+            font-family: 'Varela Round', sans-serif;
+            font-size: 1.35rem;
+            padding: 16px 42px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            min-width: 120px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(100, 100);
+                opacity: 0;
+            }
+        }
+
+        button:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:focus {
+            outline: 3px solid #ffd1dc;
+            outline-offset: 4px;
+            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.3);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #e91e63, #d81b60, #c2185b);
+            color: white;
+            box-shadow: 0 7px 22px rgba(233, 30, 99, 0.45);
+            z-index: 20;
+        }
+        
+        #yesBtn:hover {
+            transform: scale(1.14);
+            box-shadow: 0 9px 28px rgba(233, 30, 99, 0.6);
+            background: linear-gradient(135deg, #d81b60, #c2185b, #ad1457);
+        }
+
+        #noBtn {
+            background-color: white;
+            color: #e91e63;
+            border: 2.5px solid #e91e63;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.15);
+            z-index: 15;
+        }
+        
+        #noBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 7px 20px rgba(233, 30, 99, 0.3);
+            background-color: #fff7f9;
+        }
+
+        /* Emoji Burst Celebration */
+        .emoji-burst {
+            position: fixed;
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 5000;
+            animation: burstUp 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+        
+        @keyframes burstUp {
+            0% { 
+                transform: translateY(0) scale(0.4) rotate(0deg); 
+                opacity: 0.95; 
+            }
+            10% { 
+                opacity: 1; 
+            }
+            90% { 
+                opacity: 0.9; 
+            }
+            100% { 
+                transform: translateY(-250px) scale(2) rotate(var(--rotation)); 
+                opacity: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img 
+            id="gif" 
+            src="https://i.giphy.com/media/y93x7gLXTO5dnSWCEI/giphy.gif" 
+            alt="Cute cat blowing hearts">
+        
+        <h1 id="message">Hey Parwati... ❤️<br><br>I know I am far away in Ludhiana right now, and you are in Mumbai with our little champ. But I miss you both more than words can say. So, I have a question for you...</h1>
+        
+        <h1 id="question" class="valentine-question">Will you be my Valentine?</h1>
+        
+        <div class="buttons" id="btnContainer">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        // ✅ VERIFIED WORKING GIF URLs
+        const initialGif = "https://i.giphy.com/media/y93x7gLXTO5dnSWCEI/giphy.gif";
+        const happyGif = "https://i.giphy.com/media/QBICxav1mvX5mM7WoX/giphy.gif";
+        
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const question = document.getElementById("question");
+        const gif = document.getElementById("gif");
+        const btnContainer = document.getElementById("btnContainer");
+
+        // Preload happy GIF
+        const preloadGif = new Image();
+        preloadGif.src = happyGif;
+
+        // ============================================
+        // 1. FLOATING HEARTS BACKGROUND (Continuous)
+        // ============================================
+        const backgroundEmojis = ["❤️", "💖", "💕", "💞", "🌹", "✨", "🧸", "👶", "💑", "🥰"];
+        
+        function createFloatingHeart() {
+            const heart = document.createElement("div");
+            heart.className = "floating-heart";
+            heart.textContent = backgroundEmojis[Math.floor(Math.random() * backgroundEmojis.length)];
+            
+            // Random position (across entire width)
+            heart.style.left = Math.random() * 100 + "vw";
+            
+            // Random size (20px to 40px)
+            const size = Math.random() * 20 + 20;
+            heart.style.fontSize = size + "px";
+            
+            // Random animation duration (4s to 7s)
+            const duration = Math.random() * 3 + 4;
+            heart.style.animationDuration = duration + "s";
+            
+            // Random delay for staggered appearance
+            heart.style.animationDelay = Math.random() * 2 + "s";
+            
+            document.body.appendChild(heart);
+            
+            // Remove after animation to prevent memory buildup
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + 2) * 1000);
+        }
+
+        // Start continuous heart creation
+        setInterval(createFloatingHeart, 400);
+        // Create initial batch
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createFloatingHeart, i * 200);
+        }
+
+        // ============================================
+        // 2. SMART MESSAGE DISPLAY (ALL AT ONCE)
+        // ============================================
+        
+        // Full heartfelt message is already visible in HTML
+        // After 6 seconds, fade in the Valentine question below it
+        setTimeout(() => {
+            question.classList.add('visible');
+            
+            // After question appears, show buttons after 0.8s
+            setTimeout(() => {
+                btnContainer.classList.add('visible');
+            }, 800);
+            
+        }, 6000);
+
+        // ============================================
+        // 3. "NO" BUTTON ESCAPE LOGIC (Enhanced)
+        // ============================================
+        function moveNoButton() {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const rect = noBtn.getBoundingClientRect();
+            
+            // Safe boundaries (avoid edges and important areas)
+            const minX = 30;
+            const maxX = vw - rect.width - 30;
+            const minY = 120; // Avoid top message area
+            const maxY = vh - rect.height - 30;
+            
+            // Calculate yes button position to avoid overlap
+            const yesRect = yesBtn.getBoundingClientRect();
+            const yesCenterX = yesRect.left + yesRect.width / 2;
+            const yesCenterY = yesRect.top + yesRect.height / 2;
+            
+            let newX, newY;
+            let attempts = 0;
+            const maxAttempts = 50;
+            
+            do {
+                newX = Math.floor(Math.random() * (maxX - minX)) + minX;
+                newY = Math.floor(Math.random() * (maxY - minY)) + minY;
+                attempts++;
+                
+                // Check distance from yes button
+                const distance = Math.sqrt(
+                    Math.pow(newX - yesCenterX, 2) + 
+                    Math.pow(newY - yesCenterY, 2)
+                );
+                
+            } while (
+                attempts < maxAttempts && 
+                (newX < 80 || // Avoid extreme left
+                 newX > vw - 150 || // Avoid extreme right
+                 newY < 150 || // Avoid top area
+                 // Ensure minimum distance from yes button
+                 Math.sqrt(Math.pow(newX - yesCenterX, 2) + Math.pow(newY - yesCenterY, 2)) < 200)
+            );
+            
+            // Apply position
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+            noBtn.style.zIndex = '1000';
+            noBtn.blur();
+        }
+
+        // Unified escape triggers (mouse, touch, keyboard)
+        ['mouseover', 'touchstart', 'focus'].forEach(eventType => {
+            noBtn.addEventListener(eventType, (e) => {
+                e.preventDefault();
+                moveNoButton();
+            }, { passive: false });
+        });
+        
+        // Prevent accidental "No" selection
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // ============================================
+        // 4. "YES" BUTTON MAGIC + EMOJI BURST
+        // ============================================
+        yesBtn.addEventListener("click", () => {
+            // Update message with heartfelt text
+            document.getElementById('message').innerHTML = `Yay! I love you Parwati! ❤️`;
+            question.innerHTML = `
+                <span style="font-size: 1.4rem; font-weight: 500; line-height: 1.6; color: #c2185b">
+                    Distance is just a test to see how far love can travel.<br>
+                    Give the biggest hug and kiss to our baby boy from Papa.<br>
+                    I miss you both more than anything! 🥰
+                </span>
+            `;
+            question.style.fontSize = "2.1rem";
+            question.style.marginTop = "10px";
+            question.style.marginBottom = "25px";
+            
+            // Update GIF
+            gif.src = happyGif;
+            gif.alt = "Happy dancing cat celebrating love";
+            
+            // Hide buttons with fade
+            btnContainer.style.opacity = "0";
+            setTimeout(() => {
+                yesBtn.disabled = true;
+                noBtn.disabled = true;
+            }, 400);
+            
+            // Trigger SUPER EMOJI BURST celebration!
+            createEmojiBurstCelebration();
+            
+            // Speed up background hearts for extra magic
+            setTimeout(() => {
+                const existingInterval = setInterval(createFloatingHeart, 150);
+            }, 100);
+        });
+
+        // ============================================
+        // 5. EMOJI BURST CELEBRATION FUNCTION
+        // ============================================
+        function createEmojiBurstCelebration() {
+            const burstEmojis = ["❤️", "💖", "💘", "💕", "💞", "💋", "😚", "🥰", "😻", "✨", "🎉", "🌹", "🧸", "👶", "💑"];
+            const totalEmojis = 80; // Massive celebration!
+            
+            for (let i = 0; i < totalEmojis; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji-burst';
+                    emoji.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+                    
+                    // Random position (biased toward center-bottom for natural burst)
+                    const centerX = window.innerWidth / 2;
+                    const spread = window.innerWidth * 0.6;
+                    const x = centerX + (Math.random() - 0.5) * spread;
+                    
+                    // Start from bottom 60% of screen
+                    const y = window.innerHeight - (Math.random() * window.innerHeight * 0.6);
+                    
+                    // Random rotation (-360 to +360 degrees)
+                    const rotation = Math.random() * 720 - 360;
+                    emoji.style.setProperty('--rotation', `${rotation}deg`);
+                    
+                    // Random size variation
+                    const size = 1.5 + Math.random() * 1.5;
+                    emoji.style.fontSize = `${size}rem`;
+                    
+                    // Random animation delay for wave effect
+                    const delay = Math.random() * 0.6;
+                    emoji.style.animationDelay = `${delay}s`;
+                    
+                    emoji.style.left = `${x}px`;
+                    emoji.style.top = `${y}px`;
+                    
+                    document.body.appendChild(emoji);
+                    
+                    // Cleanup after animation
+                    setTimeout(() => {
+                        if (emoji.parentNode) {
+                            emoji.parentNode.removeChild(emoji);
+                        }
+                    }, 4000);
+                }, i * 25); // Rapid burst effect (25ms between each)
+            }
+        }
+    </script>
+</body>
+</html>
